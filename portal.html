@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Nugget Upload Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .upload-button {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-button:hover {
+            background-color: #f0f0f0;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Dino Nugget Image Upload</h1>
+        <input type="file" id="upload-input" accept="image/*" multiple style="display: none;">
+        <label for="upload-input" class="upload-button">Upload Images</label>
+        <div class="image-grid" id="image-grid"></div>
+    </div>
+
+    <script>
+        const uploadInput = document.getElementById('upload-input');
+        const imageGrid = document.getElementById('image-grid');
+
+        uploadInput.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files);
+            files.forEach((file) => {
+                const imgURL = URL.createObjectURL(file);
+                const imgElement = document.createElement('img');
+                imgElement.src = imgURL;
+                imgElement.alt = "Dino Nugget";
+                imageGrid.appendChild(imgElement);
+            });
+        });
+    </script>
+</body>
+</html>

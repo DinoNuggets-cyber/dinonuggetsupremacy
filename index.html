@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinonuggets Are Life!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+        }
+        header, footer {
+            text-align: center;
+            padding: 16px;
+            background-color: #3b82f6;
+            color: white;
+        }
+        main {
+            padding: 16px;
+        }
+        .intro, .facts, .quiz, .gallery {
+            margin-bottom: 24px;
+        }
+        .intro img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .facts ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+        .gallery-images {
+            display: flex;
+            gap: 8px;
+        }
+        .gallery-images img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 8px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .upload-button {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-button:hover {
+            background-color: #f0f0f0;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .link-button {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .link-button:hover {
+            background-color: #2563eb;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .quiz-question {
+            margin-bottom: 16px;
+        }
+        .quiz-options label {
+            display: block;
+            margin: 8px 0;
+        }
+        .quiz-result {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 18px;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dinonugget Kingdom!</h1>
+        <p>Where the nuggets are shaped like dinosaurs and the fun never ends.</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>What Are Dinonuggets?</h2>
+            <p>They're exactly what you think they are—chicken nuggets shaped like dinosaurs. Need we say more?</p>
+            <img src="images/images.jpeg" alt="Dino Nuggets">
+        </section>
+
+        <section class="facts">
+            <h2>5 Cool Facts About Dinonuggets!</h2>
+            <ul>
+                <li>They're scientifically proven to make any meal 100% more fun.</li>
+                <li>They're the only nugget that can time travel... back to your childhood.</li>
+                <li>They're actually just regular nuggets, but better.</li>
+                <li>Dinosaurs went extinct, but these nuggets will never fade.</li>
+                <li>Eating them is a dino-mite experience.</li>
+            </ul>
+        </section>
+
+        <section class="quiz">
+            <h2>What Dino Nugget Are You? Take the Quiz!</h2>
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <button id="nextButton" style="display: none;">Next</button>
+                <div class="quiz-result" id="quizResult"></div>
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2>Our Favorite Nugget Moments</h2>
+            <div class="gallery-images">
+                <img src="images/images (1).jpeg" alt="Dino Nugget 1">
+                <img src="images/images (2).jpeg" alt="Dino Nugget 2">
+                <img src="images/images (3).jpeg" alt="Dino Nugget 3">
+            </div>
+        </section>
+
+        <section>
+            <div class="card">
+                <h2>Dino Nugget Image Upload</h2>
+                <input type="file" id="upload-input" accept="image/*" multiple style="display: none;">
+                <label for="upload-input" class="upload-button">Upload Images</label>
+                <div class="image-grid" id="image-grid"></div>
+                <a href="https://example.com" target="_blank" class="link-button">Go to Example Website</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Dinonuggets Inc. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const uploadInput = document.getElementById('upload-input');
+        const imageGrid = document.getElementById('image-grid');
+
+        uploadInput.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files);
+            files.forEach((file) => {
+                const imgURL = URL.createObjectURL(file);
+                const imgElement = document.createElement('img');
+                imgElement.src = imgURL;
+                imgElement.alt = "Dino Nugget";
+                imageGrid.appendChild(imgElement);
+            });
+        });
+
+        const quizContainer = document.getElementById('quizContainer');
+        const quizQuestion = document.getElementById('quizQuestion');
+        const quizOptions = document.getElementById('quizOptions');
+        const nextButton = document.getElementById('nextButton');
+        const quizResult = document.getElementById('quizResult');
+
+        const questions = [
+            { question: "What is your favorite color?", options: ["Red", "Blue", "Green", "Yellow"] },
+            { question: "What is your favorite activity?", options: ["Hunting", "Exploring", "Relaxing", "Socializing"] },
+            { question: "What describes you best?", options: ["Strong", "Smart", "Friendly", "Adventurous"] },
+            { question: "What do you prefer to eat?", options: ["Meat", "Plants", "Both", "Snacks"] },
+            { question: "What is your ideal habitat?", options: ["Jungle", "Plains", "Mountains", "Coastal"] },
+            { question: "How do you handle challenges?", options: ["Head-on", "With strategy", "With patience", "With teamwork"] },
+            { question: "What’s your favorite time of day?", options: ["Morning", "Afternoon", "Evening", "Night"] }
+        ];
+
+        let currentQuestionIndex = 0;
+        let scores = [0, 0, 0, 0];
+
+        function displayQuestion() {
+            quizResult.textContent = "";
+            const currentQuestion = questions[currentQuestionIndex];
+            quizQuestion.textContent = currentQuestion.question;
+            quizOptions.innerHTML = "";
+            currentQuestion.options.forEach((option, index) => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'option';
+                radio.value = index;
+                label.appendChild(radio);
+                label.append(option);
+                quizOptions.appendChild(label);
+            });
+            nextButton.style.display = "block";
+        }
+
+        nextButton.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                scores[selectedOption.value]++;
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    nextButton.style.display = "none";
+                    const dinoTypes = ["T-Rex", "Triceratops", "Velociraptor", "Brachiosaurus"];
+                    const maxScoreIndex = scores.indexOf(Math.max(...scores));
+                    quizResult.textContent = `You are a ${dinoTypes[maxScoreIndex]}!`;
+                }
+            } else {
+                alert("Please select an option to proceed.");
+            }
+        });
+
+        displayQuestion();
+    </script>
+</body>
+</html>
